@@ -111,7 +111,12 @@
         document.getElementById("greenbia").textContent = round(amount * 95.3 / 224.1, 1);
         document.getElementById("promax").textContent   = round(amount *  3.5 / 224.1, 1);
         document.getElementById("oliveoil").textContent = round(amount * 15.3 / 224.1, 1);
-        document.getElementById("time").textContent     = formatMinutes(amount / speed * 60, 1);
+        if ( speed != 0 ) {
+            document.getElementById("time").textContent = formatMinutes(amount / speed * 60, 1);
+        } else {
+            document.getElementById("time").textContent = "";
+        }
+
     }
 
     function round(num, digits) {

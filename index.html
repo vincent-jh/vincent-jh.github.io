@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container my-5">
+    <h1>규원이 케톤식</h1><br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">용량</th>
+            <th scope="col">40</th>
+            <th scope="col">80</th>
+            <th scope="col">100</th>
+            <th scope="col">110</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">케토니아</th>
+            <td>19.6</td>
+            <td>39.3</td>
+            <td>49.1</td>
+            <td>54.0</td>
+        </tr>
+        <tr>
+            <th scope="row">그린비아</th>
+            <td>17.0</td>
+            <td>34.0</td>
+            <td>42.5</td>
+            <td>46.8</td>
+        </tr>
+        <tr>
+            <th scope="row">프로맥스</th>
+            <td>0.6</td>
+            <td>1.2</td>
+            <td>1.6</td>
+            <td>1.7</td>
+        </tr>
+        <tr>
+            <th scope="row">올리브유</th>
+            <td>2.7</td>
+            <td>5.5</td>
+            <td>6.8</td>
+            <td>7.5</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="col-lg-8 px-0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    용량<input type="text" id="amount" name="amount" class="input_box" value="40" onchange="calculate();"> g
+                </div>
+                <div class="col">
+                    속도<input type="text" id="speed" name="speed" class="input_box" value="105" onchange="calculate();"> g
+                </div>
+            </div>
+        </div>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">케토니아</th>
+                <th scope="col">그린비아</th>
+                <th scope="col">프로맥스</th>
+                <th scope="col">올리브유</th>
+                <th scope="col">시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td id="ketonia">50</td>
+                <td id="greenbia">19.6</td>
+                <td id="promax">19.6</td>
+                <td id="oliveoil">19.6</td>
+                <td id="time">19.6</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="https://getbootstrap.com" class="btn btn-primary">Read the Bootstrap docs</a>
+        <a href="https://github.com/twbs/examples" class="btn btn-secondary">View on GitHub</a>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<script>
+    function calculate() {
+        var amount = document.getElementById("amount").value;
+        var speed  = document.getElementById("speed").value;
+        document.getElementById("ketonia").textContent  = round(amount *  110 / 224.1, 1);
+        document.getElementById("greenbia").textContent = round(amount * 95.3 / 224.1, 1);
+        document.getElementById("promax").textContent   = round(amount *  3.5 / 224.1, 1);
+        document.getElementById("oliveoil").textContent = round(amount * 15.3 / 224.1, 1);
+        document.getElementById("time").textContent     = formatMinutes(amount / 110 * 60, 1);
+    }
+
+    function round(num, digits) {
+        const factor = Math.pow(10, digits);
+        return Math.round(num * factor) / factor;
+    }
+
+    function formatMinutes(totalMinutes) {
+        const hours = Math.floor(totalMinutes / 60);
+        let minutes = Math.round(totalMinutes % 60);
+
+        if (minutes === 60) {
+            return `${hours + 1}시간`;
+        }
+
+        if (hours === 0) {
+            return `${minutes}분`;
+        }
+
+        if (minutes === 0) {
+            return `${hours}시간`;
+        }
+
+        return `${hours}시간 ${minutes}분`;
+    }
+</script>
+<style>
+    body {
+        font-size: 13px;
+    }
+    td, th {
+        text-align: center;
+    }
+    .input_box {
+        width : 100px;
+        margin-left: 10px;
+        text-align: center;
+    }
+    .noline {
+        border: none;
+    }
+</style>
+</body>
+</html>

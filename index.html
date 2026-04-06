@@ -97,12 +97,12 @@
 <script>
     const input_amount = document.getElementById("amount");
     const input_speed = document.getElementById("speed");
-    input_amount.addEventListener("input", (e) => {
-       calculate();
-    });
-    input_speed.addEventListener("input", (e) => {
+    input_amount.addEventListener("input", debounce((e) => {
         calculate();
-    });
+    }, 300));
+    input_speed.addEventListener("input", debounce((e) => {
+        calculate();
+    }, 300));
 
     function calculate() {
         var amount = document.getElementById("amount").value;
@@ -136,6 +136,14 @@
         }
 
         return `${hours}시간 ${minutes}분`;
+    }
+
+    function debounce(fn, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn.apply(this, args), delay);
+        };
     }
 </script>
 <style>

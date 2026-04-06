@@ -56,10 +56,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    용량<input type="text" inputmode="numeric" id="amount" name="amount" class="input_box" value="40" onkeydown="calculate();"> g
+                    용량<input type="text" inputmode="numeric" id="amount" name="amount" class="input_box" value="40"> g
                 </div>
                 <div class="col">
-                    속도<input type="text" inputmode="numeric" id="speed" name="speed" class="input_box" value="105" onkeydown="calculate();"> g
+                    속도<input type="text" inputmode="numeric" id="speed" name="speed" class="input_box" value="105"> g
                 </div>
             </div>
         </div>
@@ -95,6 +95,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="main.js"></script>
 <script>
+    const input_amount = document.getElementById("amount");
+    const input_speed = document.getElementById("speed");
+    input_amount.addEventListener("input", (e) => {
+       calculate();
+    });
+    input_speed.addEventListener("input", (e) => {
+        calculate();
+    });
+
     function calculate() {
         var amount = document.getElementById("amount").value;
         var speed  = document.getElementById("speed").value;
@@ -102,7 +111,7 @@
         document.getElementById("greenbia").textContent = round(amount * 95.3 / 224.1, 1);
         document.getElementById("promax").textContent   = round(amount *  3.5 / 224.1, 1);
         document.getElementById("oliveoil").textContent = round(amount * 15.3 / 224.1, 1);
-        document.getElementById("time").textContent     = formatMinutes(amount / 110 * 60, 1);
+        document.getElementById("time").textContent     = formatMinutes(amount / speed * 60, 1);
     }
 
     function round(num, digits) {
